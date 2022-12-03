@@ -1,4 +1,4 @@
-import { sequential, layers, train } from "@tensorflow/tfjs";
+const { sequential, layers, train } = require("@tensorflow/tfjs");
 
 const kernel_size = [3, 3];
 const pool_size = [2, 2];
@@ -45,4 +45,4 @@ model.compile({
   metrics: ["accuracy"],
 });
 
-export default model;
+module.exports = model;

@@ -1,5 +1,5 @@
-import { loadData, getTrainData, getTestData } from './data';
-import { summary, fit, evaluate, save } from './model';
+const { loadData, getTrainData, getTestData } = require('./data');
+const { summary, fit, evaluate, save } = require('./model');
 
 const run = async (epochs, batchSize, modelSavePath) => {
   loadData();

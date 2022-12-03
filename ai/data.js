@@ -1,15 +1,15 @@
-import {
+const {
   node,
   scalar,
   concat,
   oneHot,
   tensor1d,
-} from "@tensorflow/tfjs-node-gpu";
-import { readdirSync, readFileSync } from "fs";
-import { join } from "path";
+} = require("@tensorflow/tfjs-node");
+const { readdirSync, readFileSync } = require("fs");
+const { join } = require("path");
 
-const TRAIN_IMAGES_DIR = "./data/train";
-const TEST_IMAGES_DIR = "./data/test";
+const TRAIN_IMAGES_DIR = "./ai/data/train";
+const TEST_IMAGES_DIR = "./ai/data/test";
 
 function loadImages(dataDir) {
   const images = [];
@@ -17,7 +17,7 @@ function loadImages(dataDir) {
 
   const files = readdirSync(dataDir);
   files.forEach((file) => {
-    if (file.toLocaleLowerCase().endsWith(".jpg")) {
+    if (!file.toLocaleLowerCase().endsWith(".jpg")) {
       return;
     }
 
@@ -32,12 +32,9 @@ function loadImages(dataDir) {
       .expandDims();
     images.push(imageTensor);
 
-    const healthy = files[i].toLocaleLowerCase().startsWith("healthy");
-    const phytophthora = files[i].toLocaleLowerCase().startsWith("Fito");
-
-    if (healthy) {
+    if (file.toLocaleLowerCase().startsWith("healthy_")) {
       labels.push(0);
-    } else if (phytophthora) {
+    } else {
       labels.push(1);
     }
   });
@@ -74,4 +71,4 @@ class CacaoDataset {
   }
 }
 
-export default new CacaoDataset();
+module.exports = new CacaoDataset();
