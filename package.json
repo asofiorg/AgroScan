@@ -1,10 +1,12 @@
 {
   "name": "agroscan",
+  "description": "using ai to diagnose sustitution crops diseases",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "train": "node ai/main.js",
     "start": "next start",
     "lint": "next lint"
   },
@@ -14,5 +16,11 @@
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^3.2.4"
   }
 }
