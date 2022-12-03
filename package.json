@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "train": "TF_CPP_MIN_LOG_LEVEL=2 node ai/main.js",
+    "train": "node ai/main.js",
     "start": "next start",
     "lint": "next lint"
   },
