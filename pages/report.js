@@ -28,17 +28,27 @@ const Report = () => {
   const { handleSubmit, register } = useForm();
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submit = async (data) => {
-    data.lat = parseFloat(coords?.latitude).toFixed(1) || 0;
-    data.lng = parseFloat(coords?.longitude).toFixed(1) || 0;
-    data.image = image;
-    data.report = prediction?.className;
+    if (!isLoading) {
+      try {
+        setIsLoading(true);
+        data.lat = parseFloat(coords?.latitude).toFixed(1) || 0;
+        data.lng = parseFloat(coords?.longitude).toFixed(1) || 0;
+        data.image = image;
+        data.report = prediction?.className;
 
-    const sbmt = await createReport(data);
+        const sbmt = await createReport(data);
 
-    if (sbmt?.report) {
-      setIsSubmitted(true);
+        if (sbmt?.report) {
+          setIsLoading(false);
+          setIsSubmitted(true);
+        }
+      } catch (e) {
+        setIsLoading(false);
+        console.error(error);
+      }
     }
   };
 
@@ -123,7 +133,9 @@ const Report = () => {
                   })}
                 />
               </label>
-              <Button type="submit">{form?.submit}</Button>
+              <Button type="submit">
+                {isLoading ? form?.loading : form?.submit}
+              </Button>
               <Button onClick={resetReport}>{form?.again}</Button>
             </form>
           </section>

@@ -39,6 +39,7 @@ const es = {
     subtitle: "Pulsa el boton para procesar",
     button: "Procesar",
     back: "Escoger otra foto",
+    loading: "Procesando...",
   },
   result: {
     title: "Resultados",
@@ -77,6 +78,7 @@ const es = {
     },
     submit: "Enviar",
     again: "Reportar otra foto",
+    loading: "Enviando...",
   },
   submitted: {
     title: "Gracias por tu reporte",
@@ -149,6 +151,7 @@ const en = {
     subtitle: "Press the button to process",
     button: "Process",
     back: "Choose another photo",
+    loading: "Processing...",
   },
   result: {
     title: "Results",
@@ -187,6 +190,7 @@ const en = {
     },
     submit: "Submit",
     again: "Report another photo",
+    loading: "Loading...",
   },
   submitted: {
     title: "Thank you for your report",

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import * as tmImage from "@teachablemachine/image";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useImage } from "../utils/context";
 import useTranslation from "../utils/i18n";
 import convertToBase64 from "../utils/base64";
@@ -29,6 +29,8 @@ const Scan = () => {
     handleResetImage,
   } = useImage();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const WebcamRef = useRef(null);
   const UploadRef = useRef(null);
 
@@ -47,19 +49,30 @@ const Scan = () => {
   };
 
   const handlePrediction = async () => {
-    const modelURL = "/model/model.json";
-    const metadataURL = "/model/metadata.json";
+    if (!isLoading) {
+      try {
+        setIsLoading(true);
+        const modelURL = "/model/model.json";
+        const metadataURL = "/model/metadata.json";
 
-    const model = await tmImage.load(modelURL, metadataURL);
+        const model = await tmImage.load(modelURL, metadataURL);
 
-    const imageElement = new Image();
-    imageElement.src = image;
+        const imageElement = new Image();
+        imageElement.src = image;
 
-    const prediction = await model.predict(imageElement, false);
+        const prediction = await model.predict(imageElement, false);
 
-    prediction.sort((a, b) => b.probability - a.probability);
+        prediction.sort((a, b) => b.probability - a.probability);
 
-    setPrediction(prediction[0]);
+        setPrediction(prediction[0]);
+
+        setIsLoading(false);
+      } catch (e) {
+        setIsLoading(false);
+
+        console.error(r);
+      }
+    }
   };
 
   const { scan, staging, result, predict } = useTranslation();
@@ -109,7 +122,9 @@ const Scan = () => {
       ) : !prediction ? (
         <section className="flex flex-col items-center justify-center m-2">
           <img src={image} alt="Upload Preview" width={400} />
-          <Button onClick={handlePrediction}>{staging?.button}</Button>
+          <Button onClick={handlePrediction}>
+            {isLoading ? staging?.loading : staging?.button}
+          </Button>
           <Button onClick={handleResetImage}>{staging?.back}</Button>
         </section>
       ) : (

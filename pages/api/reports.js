@@ -11,7 +11,7 @@ const handler = async (req, res) => {
     if (password == PASSWORD) {
       const { page } = req.query;
 
-      const pages = Math.ceil((await prisma.report.count()) / 10);
+      const pages = await prisma.report.count();
 
       if (page && page <= pages) {
         const reports = await prisma.report.findMany({
@@ -24,7 +24,12 @@ const handler = async (req, res) => {
 
         res
           .status(200)
-          .json({ message: "Reports fetched", page, pages, reports });
+          .json({
+            message: "Reports fetched",
+            page: parseInt(page),
+            pages,
+            reports,
+          });
       } else {
         const reports = await prisma.report.findMany({
           skip: 0,
