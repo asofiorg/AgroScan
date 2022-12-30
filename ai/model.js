@@ -1,48 +1,32 @@
-const { sequential, layers, train } = require("@tensorflow/tfjs");
+const tf = require("@tensorflow/tfjs-node");
 
-const kernel_size = [3, 3];
-const pool_size = [2, 2];
-const first_filters = 32;
-const dropout_conv = 0.3;
-const dropout_dense = 0.3;
+const createModel = () => {
+  const model = tf.sequential();
 
-const model = sequential();
+  model.add(
+    tf.layers.conv2d({
+      inputShape: [IMAGE_WIDTH, IMAGE_HEIGHT, 3],
+      kernelSize: 3,
+      filters: 16,
+      activation: "relu",
+    })
+  );
+  model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
+  model.add(
+    tf.layers.conv2d({ kernelSize: 3, filters: 32, activation: "relu" })
+  );
+  model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
+  model.add(tf.layers.flatten());
+  model.add(tf.layers.dense({ units: 64, activation: "relu" }));
+  model.add(tf.layers.dense({ units: 4, activation: "softmax" }));
 
-model.add(
-  layers.conv2d({
-    inputShape: [96, 96, 1],
-    filters: first_filters,
-    kernelSize: kernel_size,
-    activation: "relu",
-  })
-);
+  model.compile({
+    loss: "categoricalCrossentropy",
+    optimizer: "adam",
+    metrics: ["accuracy"],
+  });
 
-model.add(
-  layers.conv2d({
-    filters: first_filters,
-    kernelSize: kernel_size,
-    activation: "relu",
-  })
-);
+  return model;
+};
 
-model.add(layers.maxPooling2d({ poolSize: pool_size }));
-
-model.add(layers.dropout({ rate: dropout_conv }));
-
-model.add(layers.flatten());
-
-model.add(layers.dense({ units: 256, activation: "relu" }));
-
-model.add(layers.dropout({ rate: dropout_dense }));
-
-model.add(layers.dense({ units: 7, activation: "softmax" }));
-
-const optimizer = train.adam(0.0001);
-
-model.compile({
-  optimizer: optimizer,
-  loss: "categoricalCrossentropy",
-  metrics: ["accuracy"],
-});
-
-module.exports = model;
+module.exports = createModel;

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "train": "node ai/main.js",
+    "train": "node ai/index.js",
     "start": "next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev --name init",
