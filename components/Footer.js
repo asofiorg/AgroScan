@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer>
@@ -9,7 +11,14 @@ const Footer = () => {
         className="text-blue-500 underline hover:text-blue-700"
       >
         Open Source
-      </a>
+      </a>{" "}
+      -{" "}
+      <Link
+        href="/admin"
+        className="text-blue-500 underline hover:text-blue-700"
+      >
+        Admin
+      </Link>
     </footer>
   );
 };

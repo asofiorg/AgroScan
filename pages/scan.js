@@ -62,6 +62,8 @@ const Scan = () => {
 
         const prediction = await model.predict(imageElement, false);
 
+        console.log(prediction);
+
         prediction.sort((a, b) => b.probability - a.probability);
 
         setPrediction(prediction[0]);
@@ -70,7 +72,7 @@ const Scan = () => {
       } catch (e) {
         setIsLoading(false);
 
-        console.error(r);
+        console.error(e);
       }
     }
   };
@@ -131,7 +133,7 @@ const Scan = () => {
         <section className="flex flex-col items-center justify-center m-2">
           <NextImage
             src={
-              prediction?.className == "Healthy" ? healthyImage : unhealthyImage
+              prediction?.className == "healthy" ? healthyImage : unhealthyImage
             }
             className={prediction?.className}
             width={300}
@@ -139,6 +141,9 @@ const Scan = () => {
           />
           <p className="text-center text-xl font-bold">
             {result[prediction?.className]}
+          </p>
+          <p>
+            {result?.confidence} {prediction?.probability.toFixed(2) * 100}%
           </p>
           <Link href="/report">
             <Button>{result?.report}</Button>

@@ -7,7 +7,7 @@ import useTranslation from "../utils/i18n";
 import { useState } from "react";
 
 const Dashboard = ({ password }) => {
-  const { admin } = useTranslation();
+  const { admin, predictions } = useTranslation();
 
   const [page, setPage] = useState(1);
 
@@ -56,7 +56,7 @@ const Dashboard = ({ password }) => {
             <p className="py-1">{`${admin?.reports?.contact}: ${report?.contact}`}</p>
             <p className="py-1">{`${admin?.reports?.comments}: ${report?.comments}`}</p>
             <p className="py-1">{`${admin?.reports?.status}: ${
-              admin?.reports?.report[report?.report]
+              predictions[report?.report]
             }`}</p>
             <p>{`${admin?.reports?.date}: ${new Date(
               report?.createdAt

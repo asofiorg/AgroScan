@@ -16,6 +16,7 @@ const Report = () => {
     report: { data, noData },
     form,
     submitted,
+    predictions,
   } = useTranslation();
 
   const { coords } = useGeolocated({
@@ -31,7 +32,6 @@ const Report = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const submit = async (data) => {
-    if (!isLoading) {
       try {
         setIsLoading(true);
         data.lat = parseFloat(coords?.latitude).toFixed(1) || 0;
@@ -49,7 +49,7 @@ const Report = () => {
         setIsLoading(false);
         console.error(error);
       }
-    }
+    
   };
 
   const router = useRouter();
@@ -84,7 +84,7 @@ const Report = () => {
           <section className="flex flex-col items-center justify-center my-2">
             <img src={image} width={200} alt="crop" />
             <p className="my-1 font-bold text-center">
-              {data[prediction?.className]}
+              {predictions[prediction?.className]}
             </p>
             <h3 className="mt-4 text-2xl font-bold">{data?.fill}</h3>
             <h4 className="mb-2 text-lg">{data?.privacy}</h4>

@@ -44,10 +44,13 @@ const es = {
   result: {
     title: "Resultados",
     subtitle: "Hemos analizado tu foto y estos son los resultados",
-    Healthy: "Tu cultivo esta sano",
-    Unhealthy: "Tu cultivo esta enfermo",
+    healthy: "Tu cultivo esta sano",
+    monilia: "Tu cultivo tiene moniliasis",
+    fito: "Tu cultivo tiene vaina negra",
+    pod_borer: "Tu cultivo tiene maruca de las vainas",
     report: "Reportar tus resultados",
     again: "Procesar otra foto",
+    confidence: "Con una certeza del"
   },
   report: {
     noData: {
@@ -110,6 +113,12 @@ const es = {
       },
     },
   },
+  predictions: {
+    healthy: "Sano",
+    monilia: "Moniliasis",
+    fito: "Vaina negra",
+    pod_borer: "Maruca de las vainas",
+  },
 };
 
 const en = {
@@ -156,10 +165,13 @@ const en = {
   result: {
     title: "Results",
     subtitle: "We have analyzed your photo and these are the results",
-    Healthy: "Your crop is healthy",
-    Unhealthy: "Your crop is unhealthy",
+    healthy: "Your crop is healthy",
+    monilia: "Your crop has moniliasis",
+    fito: "Your crop has black pod",
+    pod_borer: "Your crop has pod borer",
     report: "Report your results",
     again: "Scan another crop",
+    confidence: "With a confidence of",
   },
   report: {
     noData: {
@@ -221,6 +233,12 @@ const en = {
         Unhealthy: "Unhealthy",
       },
     },
+  },
+  predictions: {
+    healthy: "Healthy",
+    monilia: "Moniliasis",
+    fito: "Black pod",
+    pod_borer: "Pod borer",
   },
 };
 
