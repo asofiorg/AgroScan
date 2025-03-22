@@ -45,10 +45,14 @@ const isPWA =
   window.navigator.standalone ||
   document.referrer.includes("android-app://");
 
-welcomeMessage.style.display = "block";
 if (isPWA) {
+  welcomeMessage.style.display = "block";
   installPrompt.style.display = "none";
+} else {
+  welcomeMessage.style.display = "none";
+  installPrompt.style.display = "block";
 }
+
 initializeModels();
 
 let deferredPrompt;
