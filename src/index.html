@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="AgroScan - Offline ML models to detect diseases in substitution crops"
+    />
+    <meta name="theme-color" content="#4CAF50" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="AgroScan" />
+    <meta name="theme-color" content="#4CAF50" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#388E3C" media="(prefers-color-scheme: dark)" />
+    <title>AgroScan</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/android-icon-192x192.png" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="networkStatus" class="network-status" role="status" aria-live="polite">
+      <span class="network-indicator"></span>
+      <span class="network-text">Online</span>
+    </div>
+    
+    <main>
+      <div id="welcomeMessage" style="display: none">
+        <div class="app-header">
+          <img src="/android-icon-192x192.png" alt="AgroScan Logo" class="app-logo" />
+          <h1>AgroScan</h1>
+          <p class="app-subtitle">Detect plant diseases instantly</p>
+        </div>
+        
+        <div class="models-list">
+          <div class="model-card" data-model="cocoa-disease">
+            <div class="model-info">
+              <h2>Cocoa Disease Detection</h2>
+              <p>Detect common diseases in cocoa plants</p>
+              <div class="model-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">Loading...</span>
+              </div>
+            </div>
+            <button class="scan-button" disabled>
+              <span class="icon">📸</span>
+              Scan Now
+            </button>
+          </div>
+        </div>
+
+        <div class="first-scan-notice">
+          <span class="notice-icon">ℹ️</span>
+          <p>First scan requires internet connection to download the model. After that, you can use it offline!</p>
+        </div>
+      </div>
+
+      <div id="installPrompt">
+        <div class="app-header">
+          <img src="/android-icon-192x192.png" alt="AgroScan Logo" class="app-logo" />
+          <h1>AgroScan</h1>
+          <p class="app-subtitle">Install for offline use</p>
+        </div>
+
+        <div class="install-container">
+          <!-- For Android/Desktop -->
+          <div id="pwaPrompt">
+            <button id="installButton" type="button">
+              <span class="icon">📱</span>
+              Install Now
+            </button>
+          </div>
+
+          <!-- For iOS -->
+          <div id="iosPrompt">
+            <p>To install on iOS:</p>
+            <ol>
+              <li>Tap the share button <span class="ios-icon">⎋</span></li>
+              <li>Select "Add to Home Screen" 📱</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js" defer></script>
+  </body>
+</html>

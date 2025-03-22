@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="AgroScan - Scan crops for diseases" />
+    <meta name="theme-color" content="#4CAF50" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="AgroScan" />
+    <meta name="theme-color" content="#4CAF50" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#388E3C" media="(prefers-color-scheme: dark)" />
+    <title>Scan - AgroScan</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/android-icon-192x192.png" />
+    <link rel="stylesheet" href="scan.css" />
+  </head>
+  <body>
+    <div id="networkStatus" class="network-status" role="status" aria-live="polite">
+      <span class="network-indicator"></span>
+      <span class="network-text">Online</span>
+    </div>
+
+    <div id="loadingIndicator" class="loading-indicator" role="status" aria-live="polite">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading model...</div>
+      <div class="loading-progress">0%</div>
+    </div>
+
+    <main>
+      <div class="camera-container">
+        <video id="camera" autoplay playsinline></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        
+        <div class="camera-overlay">
+          <button id="backButton" class="icon-button" type="button" aria-label="Go back">
+            ←
+          </button>
+          <button id="analyzeButton" class="primary-button" type="button" disabled>
+            Analyze Image
+          </button>
+          <button id="switchCamera" class="icon-button" type="button" aria-label="Switch camera">
+            🔄
+          </button>
+        </div>
+      </div>
+
+      <div id="resultsPanel" class="results-panel hidden" role="dialog" aria-labelledby="resultsTitle">
+        <div class="results-content">
+          <h2 id="resultsTitle" class="results-title">Analysis Results</h2>
+          <div id="resultsList" class="results-list"></div>
+          <button id="closeResults" class="primary-button" type="button">
+            Continue Scanning
+          </button>
+        </div>
+      </div>
+    </main>
+    <script src="scan.js" defer></script>
+  </body>
+</html> 

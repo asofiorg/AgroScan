@@ -1,0 +1,362 @@
+:root {
+  /* Colors */
+  --color-primary: #4caf50;
+  --color-primary-dark: #388e3c;
+  --color-primary-light: #81c784;
+  --color-white: #ffffff;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-shadow: rgba(76, 175, 80, 0.2);
+  --color-background: #f4f9f4;
+
+  /* Safe Area Insets */
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  --safe-area-inset-left: env(safe-area-inset-left);
+  --safe-area-inset-right: env(safe-area-inset-right);
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-default: 0.3s ease;
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: -webkit-fill-available;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-background), #ffffff);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+}
+
+/* Layout */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  padding-top: max(20px, var(--safe-area-inset-top));
+  padding-bottom: max(20px, var(--safe-area-inset-bottom));
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(76, 175, 80, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(76, 175, 80, 0.08) 0%, transparent 50%);
+  z-index: -1;
+}
+
+/* Components */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.app-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.app-subtitle {
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+}
+
+#welcomeMessage {
+  background: var(--color-white);
+  padding: 24px;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.models-list {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.model-card {
+  background: var(--color-white);
+  border: 2px solid rgba(76, 175, 80, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.model-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.model-info {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.model-info h2 {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.model-info p {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.model-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-text-light);
+  position: relative;
+}
+
+.model-card[data-status="loading"] .status-indicator {
+  animation: pulse 1.5s infinite;
+}
+
+.model-card[data-status="ready"] .status-indicator {
+  background: var(--color-primary);
+}
+
+.model-card[data-status="error"] .status-indicator {
+  background: #dc3545;
+}
+
+.first-scan-notice {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.notice-icon {
+  font-size: 1.2rem;
+}
+
+#installPrompt {
+  background: var(--color-white);
+  padding: 24px;
+  border-radius: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.install-container {
+  margin-top: 20px;
+}
+
+#installButton {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+}
+
+#installButton:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+#iosPrompt {
+  margin-top: 24px;
+  text-align: left;
+}
+
+#iosPrompt p {
+  margin-bottom: 12px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+#iosPrompt ol {
+  list-style-position: outside;
+  padding-left: 24px;
+}
+
+#iosPrompt li {
+  margin: 12px 0;
+  color: var(--color-text);
+}
+
+.ios-icon {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+.scan-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scan-button:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.scan-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.icon {
+  font-size: 1.2em;
+}
+
+.network-status {
+  position: fixed;
+  top: max(env(safe-area-inset-top), 16px);
+  right: max(env(safe-area-inset-right), 16px);
+  background: var(--color-white);
+  padding: 8px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.network-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-light);
+}
+
+.network-status[data-status="online"] .network-indicator {
+  background: var(--color-primary);
+}
+
+.network-status[data-status="offline"] .network-indicator {
+  background: #dc3545;
+}
+
+.network-status[data-status="offline"] {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .app-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .app-header h1 {
+    font-size: 1.75rem;
+  }
+
+  #welcomeMessage,
+  #installPrompt {
+    padding: 20px;
+    width: 95%;
+  }
+}
