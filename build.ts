@@ -4,7 +4,7 @@ import { train } from "./ai";
 
 async function build() {
   try {
-    const dist = "./dist";
+    const dist = "./docs";
 
     // Clean dist directory if it exists
     if (fs.existsSync(dist)) {
